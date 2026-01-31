@@ -1,98 +1,205 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Event API com NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Esta é uma API RESTful completa para gerenciamento de eventos e usuários, construída com NestJS, TypeScript e MongoDB. O projeto foi desenvolvido com foco em boas práticas, separação de responsabilidades e escalabilidade, servindo como um exemplo prático de uma aplicação backend robusta.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📜 Visão Geral do Projeto
 
-## Description
+A API oferece endpoints para realizar operações de CRUD (Criar, Ler, Atualizar, Deletar) para duas entidades principais: **Usuários** e **Eventos**. A arquitetura segue os padrões do NestJS, utilizando Módulos, Controllers, Services e Repositories para organizar o código de forma limpa e manutenível.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Features
 
-## Project setup
+- **Gestão de Usuários**: CRUD completo para usuários, com senhas criptografadas.
+- **Gestão de Eventos**: CRUD completo para eventos.
+- **Validação de Dados**: Uso de DTOs (Data Transfer Objects) e `class-validator` para validar os dados de entrada.
+- **Abstração de Lógica**: A lógica de negócios é encapsulada nos serviços, mantendo os controllers enxutos.
+- **Acesso ao Banco de Dados**: Padrão de repositório para interagir com o MongoDB através do Mongoose.
+- **Configuração de Ambiente**: Suporte a variáveis de ambiente com `.env`.
 
-```bash
-$ pnpm install
+## 🛠️ Tecnologias Utilizadas
+
+- **Backend**:
+  - [NestJS](https://nestjs.com/): Um framework Node.js progressivo para construir aplicações backend eficientes e escaláveis.
+  - [TypeScript](https://www.typescriptlang.org/): Superset do JavaScript que adiciona tipagem estática.
+  - [MongoDB](https://www.mongodb.com/): Banco de dados NoSQL orientado a documentos.
+  - [Mongoose](https://mongoosejs.com/): ODM (Object Data Modeling) para modelar os dados da aplicação para o MongoDB.
+  - [Bcrypt](https://www.npmjs.com/package/bcrypt): Biblioteca para criptografia de senhas.
+  - [class-validator](https://github.com/typestack/class-validator): Para validação de dados baseada em DTOs.
+
+- **Testes**:
+  - [Jest](https://jestjs.io/): Framework de testes em JavaScript.
+  - [Supertest](https://github.com/ladjs/supertest): Para testes de API (E2E).
+
+- **Qualidade de Código**:
+  - [ESLint](https://eslint.org/): Ferramenta para identificar e reportar padrões no código.
+  - [Prettier](https://prettier.io/): Formatador de código.
+
+## 📂 Estrutura do Projeto
+
+O projeto é organizado de forma modular para garantir a separação de responsabilidades.
+
+```
+src/
+├── app.module.ts       # Módulo raiz da aplicação
+├── main.ts             # Arquivo de entrada da aplicação
+├── user/               # Módulo de Usuários
+│   ├── Schema/
+│   │   └── user.schema.ts
+│   ├── dto/
+│   │   ├── create-user.dto.ts
+│   │   └── update-user.dto.ts
+│   ├── repositories/
+│   │   └── user.repository.ts
+│   ├── services/
+│   │   ├── create-user.service.ts
+│   │   └── ... (outros serviços)
+│   ├── user.controller.ts
+│   └── user.module.ts
+└── event/              # Módulo de Eventos
+    ├── Schema/
+    │   └── events.schema.ts
+    ├── dto/
+    │   ├── create-event.dto.ts
+    │   └── update-event.dto.ts
+    ├── interfaces/
+    │   └── IEventEntity.ts
+    ├── repositories/
+    │   └── event.repository.ts
+    ├── services/
+    │   ├── create-event.service.ts
+    │   └── ... (outros serviços)
+    ├── event.controller.ts
+    └── event.module.ts
 ```
 
-## Compile and run the project
+- **`main.ts`**: Inicializa o servidor NestJS.
+- **`app.module.ts`**: Orquestra os diferentes módulos da aplicação.
+- **Módulos (`user`, `event`)**: Agrupam controllers, services e toda a lógica relacionada a uma entidade.
+- **Controllers**: Recebem as requisições HTTP, validam os dados e retornam as respostas.
+- **Services**: Contêm a lógica de negócio principal.
+- **Repositories**: Camada de abstração para acesso direto ao banco de dados.
+- **Schemas**: Definição da estrutura dos documentos no MongoDB (usando Mongoose).
+- **DTOs**: Definem a estrutura dos dados que são transferidos pela rede.
 
+## 🚀 Instalação e Execução
+
+Siga os passos abaixo para executar o projeto em seu ambiente local.
+
+**Pré-requisitos:**
+- [Node.js](https://nodejs.org/en/) (versão 16 ou superior)
+- [pnpm](https://pnpm.io/installation) (ou `npm`/`yarn`)
+- [MongoDB](https://www.mongodb.com/try/download/community) (rodando localmente ou em um serviço de nuvem como o MongoDB Atlas)
+
+**1. Clone o repositório**
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+git clone <URL_DO_SEU_REPOSITORIO>
+cd event-api
 ```
 
-## Run tests
-
+**2. Instale as dependências**
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm install
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
+**3. Configure as variáveis de ambiente**
+Crie um arquivo `.env` na raiz da pasta `event-api` e adicione a string de conexão do seu banco de dados MongoDB.
+```env
+# .env
+DATABASE_URL="mongodb://seu_usuario:sua_senha@localhost:27017/seu_banco"
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+**4. Rode a aplicação em modo de desenvolvimento**
+O servidor irá reiniciar automaticamente a cada alteração no código.
+```bash
+pnpm run start:dev
+```
+A aplicação estará disponível em `http://localhost:3000`.
 
-## Resources
+### Executando os Testes
 
-Check out a few resources that may come in handy when working with NestJS:
+Para rodar os testes unitários e de integração:
+```bash
+pnpm run test
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+Para rodar os testes End-to-End (E2E), que simulam requisições reais à API:
+```bash
+pnpm run test:e2e
+```
 
-## Support
+## 📋 Documentação da API
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Aqui estão os endpoints disponíveis na API.
 
-## Stay in touch
+---
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Módulo de Usuários (`/user`)
 
-## License
+#### `POST /user/create`
+Cria um novo usuário. A senha é armazenada de forma criptografada.
+- **Request Body**:
+  ```json
+  {
+    "name": "Nome do Usuário",
+    "email": "usuario@email.com",
+    "password": "senha_forte_123"
+  }
+  ```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+#### `GET /user/all`
+Retorna uma lista de todos os usuários cadastrados.
+
+#### `GET /user/:id`
+Busca um usuário específico pelo seu `id`.
+- **Parâmetro**: `id` (string) - ID do usuário.
+
+#### `PUT /user/:id`
+Atualiza os dados de um usuário.
+- **Parâmetro**: `id` (string) - ID do usuário.
+- **Request Body** (parcial, apenas os campos a serem atualizados):
+  ```json
+  {
+    "name": "Novo Nome do Usuário"
+  }
+  ```
+
+#### `DELETE /user/:id`
+Deleta um usuário do sistema.
+- **Parâmetro**: `id` (string) - ID do usuário.
+
+---
+
+### Módulo de Eventos (`/event`)
+
+#### `POST /event/create`
+Cria um novo evento.
+- **Request Body**:
+  ```json
+  {
+    "name": "Nome do Evento",
+    "description": "Descrição detalhada do evento.",
+    "date": "2024-12-31T20:00:00.000Z",
+    "location": "Local do Evento"
+  }
+  ```
+
+#### `GET /event/all`
+Retorna uma lista de todos os eventos.
+
+#### `GET /event/:id`
+Busca um evento específico pelo seu `id`.
+- **Parâmetro**: `id` (string) - ID do evento.
+
+#### `PUT /event/:id`
+Atualiza os dados de um evento.
+- **Parâmetro**: `id` (string) - ID do evento.
+- **Request Body** (parcial):
+  ```json
+  {
+    "description": "Nova descrição do evento."
+  }
+  ```
+
+#### `DELETE /event/:id`
+Deleta um evento do sistema.
+- **Parâmetro**: `id` (string) - ID do evento.
+---
