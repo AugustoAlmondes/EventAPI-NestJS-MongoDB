@@ -29,10 +29,6 @@ A API oferece endpoints para realizar operações de CRUD (Criar, Ler, Atualizar
   - [Jest](https://jestjs.io/): Framework de testes em JavaScript.
   - [Supertest](https://github.com/ladjs/supertest): Para testes de API (E2E).
 
-- **Qualidade de Código**:
-  - [ESLint](https://eslint.org/): Ferramenta para identificar e reportar padrões no código.
-  - [Prettier](https://prettier.io/): Formatador de código.
-
 ## 📂 Estrutura do Projeto
 
 O projeto é organizado de forma modular para garantir a separação de responsabilidades.
