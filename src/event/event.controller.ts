@@ -6,9 +6,10 @@ import { FindAllEventsService } from './services/findAll-event.service';
 import { FindOneEventService } from './services/findOne-event.service';
 import { UpdateEventService } from './services/update-event.service';
 import { DeleteEventService } from './services/delete-event.service';
-import { Event } from './Schema/events.schema';
 import { IEventEntity } from './interfaces/IEventEntity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Event')
 @Controller('event')
 export class EventController {
     constructor(

@@ -7,7 +7,9 @@ import { FindOneUserService } from './services/findOne-user.service';
 import { UpdateUserService } from './services/update-user.service';
 import { DeleteUserService } from './services/delete-user.service';
 import { User } from './Schema/user.schema';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('User')
 @Controller('user')
 export class UserController {
     constructor(
