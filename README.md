@@ -25,10 +25,6 @@ A API oferece endpoints para realizar operações de CRUD (Criar, Ler, Atualizar
   - [Bcrypt](https://www.npmjs.com/package/bcrypt): Biblioteca para criptografia de senhas.
   - [class-validator](https://github.com/typestack/class-validator): Para validação de dados baseada em DTOs.
 
-- **Testes**:
-  - [Jest](https://jestjs.io/): Framework de testes em JavaScript.
-  - [Supertest](https://github.com/ladjs/supertest): Para testes de API (E2E).
-
 ## 📂 Estrutura do Projeto
 
 O projeto é organizado de forma modular para garantir a separação de responsabilidades.
